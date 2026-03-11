@@ -20,10 +20,6 @@ import {
   to = azurerm_ssh_public_key.ejbca_ssh_public_key
   id = "/subscriptions/96098664-4ddf-4492-adc7-1f5b5e08ed51/resourceGroups/ejbca-ca_group/providers/Microsoft.Compute/sshPublicKeys/ejbca-ca_key"
 }
-import {
-  to = azurerm_managed_disk.ejbca_os_disk
-  id = "/subscriptions/96098664-4ddf-4492-adc7-1f5b5e08ed51/resourceGroups/EJBCA-CA_GROUP/providers/Microsoft.Compute/disks/ejbca-ca_OsDisk_1_ca72fdeb9e5743d8afc44b28492d5a43"
-}
 
 
 
@@ -59,7 +55,10 @@ resource "azurerm_linux_virtual_machine" "ejbca-ca" {
         disk_size_gb                     = 49
         storage_account_type             = "Premium_LRS"
     }
-
+    additional_capabilities {
+        hibernation_enabled = false
+        ultra_ssd_enabled   = false
+    }	
     plan {
         name      = "ejbca_enterprise_8x5"
         product   = "ejbca_enterprise_cloud_edition_private_vhd"
