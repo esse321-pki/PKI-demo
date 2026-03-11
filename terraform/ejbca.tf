@@ -1,7 +1,31 @@
-import {
-  to = azurerm_resource_group.ejbca-ca_group
-  id = "/subscriptions/96098664-4ddf-4492-adc7-1f5b5e08ed51/resourceGroups/ejbca-ca_group"
+resource "azurerm_resource_group" "ejbca-ca_group" {
+  location   = "westeurope"
+  managed_by = null
+  name       = "ejbca-ca_group"
+  tags       = {}
 }
+import {
+  to = azurerm_network_interface.nic1
+  id = "/subscriptions/96098664-4ddf-4492-adc7-1f5b5e08ed51/resourceGroups/ejbca-ca_group/providers/Microsoft.Network/networkInterfaces/ejbca-ca537-9ac7b0a6"
+}
+import {
+  to = azurerm_network_security_group.ejbca_nsg
+  id = "/subscriptions/96098664-4ddf-4492-adc7-1f5b5e08ed51/resourceGroups/ejbca-ca_group/providers/Microsoft.Network/networkSecurityGroups/ejbca-ca-nsg"
+}
+import {
+  to = azurerm_public_ip.ejbca_public_ip
+  id = "/subscriptions/96098664-4ddf-4492-adc7-1f5b5e08ed51/resourceGroups/ejbca-ca_group/providers/Microsoft.Network/publicIPAddresses/ejbca-ca-ip-9ac7b0a6"
+}
+import {
+  to = azurerm_ssh_public_key.ejbca_ssh_public_key
+  id = "/subscriptions/96098664-4ddf-4492-adc7-1f5b5e08ed51/resourceGroups/ejbca-ca_group/providers/Microsoft.Compute/sshPublicKeys/ejbca-ca_key"
+}
+import {
+  to = azurerm_managed_disk.ejbca_os_disk
+  id = "/subscriptions/96098664-4ddf-4492-adc7-1f5b5e08ed51/resourceGroups/EJBCA-CA_GROUP/providers/Microsoft.Compute/disks/ejbca-ca_OsDisk_1_ca72fdeb9e5743d8afc44b28492d5a43"
+}
+
+
 
 # azurerm_linux_virtual_machine.ejbca-ca:
 resource "azurerm_linux_virtual_machine" "ejbca-ca" {
@@ -25,7 +49,7 @@ resource "azurerm_linux_virtual_machine" "ejbca-ca" {
         public_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEtHrNZMgENF0pgsqEBi4Eob4jrd0P8u53kWCXzY84sE generated-by-azure" 
         username   = "azureuser" 
     }    
-    resource_group_name                                    = "ejbca-ca_group"
+    resource_group_name                                    = azurerm_resource_group.ejbca-ca_group.name
     size                                                   = "Standard_D2ds_v4"
     identity {
         type         = "SystemAssigned"
