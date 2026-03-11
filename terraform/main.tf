@@ -1,3 +1,10 @@
+data "azurerm_client_config" "current" {
+}
+data "azurerm_subscription" "subscription" {
+}
+
+
+
 #main rg
 resource "azurerm_resource_group" "my" {
   name     = "rg-my"
@@ -93,3 +100,10 @@ resource "azurerm_private_dns_a_record" "test" {
   resource_group_name = azurerm_resource_group.my.name
 }
 
+#keyvault roles for ejbca appliances
+resource "azurerm_role_assignment" "ejbca_key_vault_crypto_officer" {
+  scope                            = data.azurerm_subscription.subscription.id
+  role_definition_name             = "Key Vault Crypto Officer"
+  principal_id                     = azurerm_linux_virtual_machine.ejbca.identity[0].principal_id
+  skip_service_principal_aad_check = true
+}
