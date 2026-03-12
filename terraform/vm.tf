@@ -31,4 +31,9 @@ resource "azurerm_linux_virtual_machine" "vm" {
   identity {
     type         = "SystemAssigned"
   }
+  os_disk {
+    caching                          = "ReadWrite"
+    disk_size_gb                     = 30
+    write_accelerator_enabled        = false
+  }
 }
