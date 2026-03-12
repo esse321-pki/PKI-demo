@@ -7,9 +7,9 @@ resource "azurerm_linux_virtual_machine" "vm" {
   disable_password_authentication                        = true
   disk_controller_type                                   = "NVMe"
   encryption_at_host_enabled                             = false
-  location                                               = "westeurope"
   name                                                   = "vm"
-  resource_group_name                                    = "rg-my"
+  location                                               = azurerm_resource_group.my.location
+  resource_group_name                                    = azurerm_resource_group.my.name
   secure_boot_enabled                                    = true
   size                                                   = "Standard_D2alds_v7"
   vtpm_enabled                                           = true
@@ -46,12 +46,12 @@ resource "azurerm_linux_virtual_machine" "vm" {
 # Network Interface for  VM
 resource "azurerm_network_interface" "vm-nic1" {
   name                = "vm-nic1"
-  location            = azurerm_resource_group.vm.location
-  resource_group_name = azurerm_resource_group.vm.name
+  location            = azurerm_resource_group.my.location
+  resource_group_name = azurerm_resource_group.my.name
 
   ip_configuration {
     name                          = "internal"
-    subnet_id                     = azurerm_subnet.main.subnet.id
+    subnet_id                     = azurerm_subnet.main.id
     private_ip_address_allocation = "Static"
     private_ip_address            = "10.0.11.10"
   }
