@@ -4,22 +4,6 @@ resource "azurerm_resource_group" "ejbca-ca_group" {
   name       = "ejbca-ca_group"
   tags       = {}
 }
-import {
-  to = azurerm_network_interface.nic1
-  id = "/subscriptions/96098664-4ddf-4492-adc7-1f5b5e08ed51/resourceGroups/ejbca-ca_group/providers/Microsoft.Network/networkInterfaces/ejbca-ca537-9ac7b0a6"
-}
-import {
-  to = azurerm_network_security_group.ejbca_nsg
-  id = "/subscriptions/96098664-4ddf-4492-adc7-1f5b5e08ed51/resourceGroups/ejbca-ca_group/providers/Microsoft.Network/networkSecurityGroups/ejbca-ca-nsg"
-}
-import {
-  to = azurerm_public_ip.ejbca_public_ip
-  id = "/subscriptions/96098664-4ddf-4492-adc7-1f5b5e08ed51/resourceGroups/ejbca-ca_group/providers/Microsoft.Network/publicIPAddresses/ejbca-ca-ip-9ac7b0a6"
-}
-import {
-  to = azurerm_ssh_public_key.ejbca_ssh_public_key
-  id = "/subscriptions/96098664-4ddf-4492-adc7-1f5b5e08ed51/resourceGroups/ejbca-ca_group/providers/Microsoft.Compute/sshPublicKeys/ejbca-ca_key"
-}
 
 
 

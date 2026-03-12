@@ -1,0 +1,25 @@
+{
+  "issuerParameters": {
+    "name": "Unknown"
+  },
+  "keyProperties": {
+    "curve": "P-256",
+    "exportable": true,
+    "keyType": "EC",
+    "reuseKey": false
+  },
+  "secretProperties": {
+    "contentType": "application/x-pkcs12"
+  },
+  "x509CertificateProperties": {
+    "keyUsage": [
+      "digitalSignature"
+    ],
+    "subject": "CN=vm.erik.local",
+    "subjectAlternativeNames": {
+      "dnsNames": [
+        "vm.erik.local"
+      ]
+    }
+  }
+}
