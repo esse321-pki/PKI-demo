@@ -15,7 +15,6 @@ resource "azurerm_linux_virtual_machine" "vm" {
   name                                                   = "vm"
   network_interface_ids                                  = ["/subscriptions/96098664-4ddf-4492-adc7-1f5b5e08ed51/resourceGroups/rg-my/providers/Microsoft.Network/networkInterfaces/vm472"]
   os_managed_disk_id                                     = "/subscriptions/96098664-4ddf-4492-adc7-1f5b5e08ed51/resourceGroups/RG-MY/providers/Microsoft.Compute/disks/vm_OsDisk_1_8363f43708354ea4bd777cc0cc885cca"
-  provision_vm_agent                                     = true
   resource_group_name                                    = "rg-my"
   secure_boot_enabled                                    = true
   size                                                   = "Standard_D2alds_v7"
