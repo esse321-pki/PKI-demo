@@ -33,6 +33,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
     caching                          = "ReadWrite"
     disk_size_gb                     = 30
     write_accelerator_enabled        = false
+    storage_account_type             = "Premium_LRS"    
   }
   source_image_reference {
     offer     = "ubuntu-24_04-lts"
