@@ -36,7 +36,6 @@ resource "azurerm_linux_virtual_machine" "vm" {
     caching                          = "ReadWrite"
     disk_size_gb                     = 30
     name                             = "vm_OsDisk_1_8363f43708354ea4bd777cc0cc885cca"
-    storage_account_type             = "Premium_LRS"
     write_accelerator_enabled        = false
   }
   source_image_reference {
