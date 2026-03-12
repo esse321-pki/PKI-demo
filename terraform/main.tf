@@ -1,10 +1,3 @@
-data "azurerm_client_config" "current" {
-}
-data "azurerm_subscription" "subscription" {
-}
-
-
-
 #main rg
 resource "azurerm_resource_group" "my" {
   name     = "rg-my"
