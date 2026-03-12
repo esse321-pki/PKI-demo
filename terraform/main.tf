@@ -107,3 +107,23 @@ resource "azurerm_role_assignment" "ejbca_key_vault_crypto_officer" {
   principal_id                     = azurerm_linux_virtual_machine.ejbca.identity[0].principal_id
   skip_service_principal_aad_check = true
 }
+
+#keyvault roles for ejbca appliances
+resource "azurerm_role_assignment" "vm_key_vault_crypto_officer" {
+  scope                            = data.azurerm_subscription.subscription.id
+  role_definition_name             = "Key Vault Crypto Officer"
+  principal_id                     = azurerm_linux_virtual_machine.ejbca.identity[0].principal_id
+  skip_service_principal_aad_check = true
+}
+resource "azurerm_role_assignment" "acme_private_zone_assignment" {
+  scope                 = azurerm_resource_group.main.id
+  role_definition_name  = "Private DNS Zone Contributor"
+  principal_id          = azurerm_linux_virtual_machine.vm.identity[0].principal_id
+}
+
+resource "azurerm_role_assignment" "key_vault_certificates_officer" {
+  scope                 = azurerm_resource_group.main.id
+  role_definition_name  = "Key Vault Certificates Officer"
+  principal_id          = azurerm_linux_virtual_machine.vm.identity[0].principal_id
+}
+
