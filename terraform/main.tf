@@ -97,17 +97,11 @@ resource "azurerm_private_dns_a_record" "test" {
 resource "azurerm_role_assignment" "ejbca_key_vault_crypto_officer" {
   scope                            = data.azurerm_subscription.subscription.id
   role_definition_name             = "Key Vault Crypto Officer"
-  principal_id                     = azurerm_linux_virtual_machine.ejbca.identity[0].principal_id
-  skip_service_principal_aad_check = true
-}
-
-#keyvault roles for ejbca appliances
-resource "azurerm_role_assignment" "vm_key_vault_crypto_officer" {
-  scope                            = data.azurerm_subscription.subscription.id
-  role_definition_name             = "Key Vault Crypto Officer"
   principal_id                     = azurerm_linux_virtual_machine.ejbca-ca.identity[0].principal_id
   skip_service_principal_aad_check = true
 }
+
+
 resource "azurerm_role_assignment" "acme_private_zone_assignment" {
   scope                 = data.azurerm_subscription.subscription.id
   role_definition_name  = "Private DNS Zone Contributor"
