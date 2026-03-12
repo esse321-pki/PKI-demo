@@ -15,7 +15,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
   vtpm_enabled                                           = true
   zone                                                   = "1"
   network_interface_ids = [
-    azurerm_network_interface.nic1.id
+    azurerm_network_interface.vm-nic1.id
   ]
 
   additional_capabilities {
@@ -44,7 +44,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
 
 
 # Network Interface for  VM
-resource "azurerm_network_interface" "nic1" {
+resource "azurerm_network_interface" "vm-nic1" {
   name                = "vm-nic1"
   location            = azurerm_resource_group.vm.location
   resource_group_name = azurerm_resource_group.vm.name
