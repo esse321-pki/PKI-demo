@@ -31,15 +31,4 @@ resource "azurerm_linux_virtual_machine" "vm" {
   identity {
     type         = "SystemAssigned"
   }
-  os_disk {
-    caching                          = "ReadWrite"
-    disk_size_gb                     = 30
-    write_accelerator_enabled        = false
-  }
-  source_image_reference {
-    offer     = "ubuntu-24_04-lts"
-    publisher = "canonical"
-    sku       = "server"
-    version   = "latest"
-  }
 }
