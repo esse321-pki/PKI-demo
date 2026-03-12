@@ -14,6 +14,10 @@ resource "azurerm_linux_virtual_machine" "vm" {
   size                                                   = "Standard_D2alds_v7"
   vtpm_enabled                                           = true
   zone                                                   = "1"
+  network_interface_ids = [
+    azurerm_network_interface.nic1.id
+  ]
+
   additional_capabilities {
     hibernation_enabled = false
     ultra_ssd_enabled   = false
@@ -35,5 +39,20 @@ resource "azurerm_linux_virtual_machine" "vm" {
     publisher = "canonical"
     sku       = "server"
     version   = "latest"
+  }
+}
+
+
+# Network Interface for  VM
+resource "azurerm_network_interface" "nic1" {
+  name                = "vm-nic1"
+  location            = azurerm_resource_group.vm.location
+  resource_group_name = azurerm_resource_group.vm.name
+
+  ip_configuration {
+    name                          = "internal"
+    subnet_id                     = azurerm_subnet.main.subnet.id
+    private_ip_address_allocation = "Static"
+    private_ip_address            = "10.0.11.10"
   }
 }
