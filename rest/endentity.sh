@@ -2,12 +2,12 @@ IT=$(shuf -i 1000-10000 -n 1)
 SAN="DNS:*.erik.local"
 SANREST=$(echo  $SAN|sed -e 's/DNS:/DNSNAME=/g')
 openssl req -nodes -newkey rsa:4096 \
-  -keyout /tmp/test${IT}.key \
-  -out /tmp/test${IT}.csr \
+  -keyout test${IT}.key \
+  -out test${IT}.csr \
   -subj "CN=test.erik.local"  \
   -addext "subjectAltName = ${SAN} " 
 
-CSR=$(awk 'NR>2 { sub(/\r/, ""); printf "%s",last} { last=$0 }' /tmp/test${IT}.csr)
+CSR=$(awk 'NR>2 { sub(/\r/, ""); printf "%s",last} { last=$0 }' test${IT}.csr)
 username=eriktest-0000${IT}
 endentity_data="{\
             \"username\":\"${username}\", \
@@ -21,9 +21,9 @@ endentity_data="{\
         }"
 
 curl   --request POST \
-    --url https://ca1-test.ca.pki.skatteetaten-it.no/ejbca/ejbca-rest-api/v1/endentity \
+    --url https://ca.erik.local/ejbca/ejbca-rest-api/v1/endentity \
     --header 'content-type: application/json' \
-    --cert my.cer \
-        --key my.key \
+    --cert rest.cer \
+        --key rest.key \
         --data "$(echo $endentity_data)"
 echo $username
