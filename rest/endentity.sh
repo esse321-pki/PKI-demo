@@ -4,7 +4,7 @@ SANREST=$(echo  $SAN|sed -e 's/DNS:/DNSNAME=/g')
 openssl req -nodes -newkey rsa:4096 \
   -keyout test${IT}.key \
   -out test${IT}.csr \
-  -subj "CN=test.erik.local"  \
+  -subj "/CN=test.erik.local"  \
   -addext "subjectAltName = ${SAN} " 
 
 CSR=$(awk 'NR>2 { sub(/\r/, ""); printf "%s",last} { last=$0 }' test${IT}.csr)
@@ -26,4 +26,4 @@ curl   --request POST \
     --cert rest.cer \
         --key rest.key \
         --data "$(echo $endentity_data)"
-export $username
+export username=$username
