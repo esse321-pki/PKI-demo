@@ -1,4 +1,4 @@
-ESTPASSWORD=
+ESTPASSWORD=ejbcaugdemo
 mkdir newkey oldkey
 openssl req -nodes -newkey rsa:3072 -keyout ./newkey/testEST.key   -out ./newkey/testEST.csr   -subj "/C=NO/O=Erik/CN=eriksinESTtest"
 sed -i '/^-----BEGIN CERTIFICATE REQUEST-----$/d; /^-----END CERTIFICATE REQUEST-----$/d' ./newkey/testEST.csr 

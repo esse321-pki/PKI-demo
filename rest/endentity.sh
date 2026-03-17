@@ -26,4 +26,4 @@ curl   --request POST \
     --cert rest.cer \
         --key rest.key \
         --data "$(echo $endentity_data)"
-export username=$username
+echo $IT>it
